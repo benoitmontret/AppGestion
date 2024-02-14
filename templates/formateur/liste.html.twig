@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FORMATEUR{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Liste des formateur</h1>
+
+    <ul>    
+        {% for formateur in formateurListe %}
+            <li>
+            <a href="{{path("formateur", {id : formateur.id}) }}"> {{ formateur.nom}}</a>
+            {{ formateur.prenom }}  / {{formateur.email}}</li>
+            <ul>
+                {% for mat in formateur.matieres %}
+                    <li>{{ mat.nom }} </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}    
+    </ul>
+    {# <ul>
+        {% for joueur in listeJoueurs %}
+            <li>
+            <a href="{{ path("infoJoueur", {id : joueur.id}) }}"> {{ joueur.prenom }} {{ joueur.nom}} / {{joueur.email}}</a></li>
+            <ul>
+                {% for v in joueur.voiture %}
+                    <li>{{ v.marque }} / {{ v.modele }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}    
+    </ul> #}
+
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FORMATEUR{% endblock %}
+
+{% block body %}
+
+
+
+<div>
+    <h1>information pour le formateur {{ formateur.nom}}</h1>
+
+            <h2> Liste de vos matières</h2>
+
+            <ul>
+                {% for mat in formateur.matieres %}
+                    <li>{{ mat.nom }} </li>
+                {% endfor %}
+            </ul>
+
+
+
+
+{% endblock %}
