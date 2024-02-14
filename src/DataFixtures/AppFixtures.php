@@ -31,15 +31,6 @@ class AppFixtures extends Fixture
         $manager -> persist($matiere4);
 
 
-//fixture formation
-        $formation1 = new Formation;
-        $formation1 -> setNom('maintenance informatique');
-        $manager -> persist($formation1);
-
-        $formation2 = new Formation;
-        $formation2 -> setNom('gestion administration');
-        $manager -> persist($formation2);
-
 
 //fixture Formateur
         $utilisateur1 = new Utilisateur;
@@ -126,12 +117,20 @@ class AppFixtures extends Fixture
                         -> setPrenom('Sarah')
                         -> setEmail('slarnis@mail.fr')
                         -> setRoles(['tuteur'])
-                        -> setPassword('0000')
-                        -> addApprenti($utilisateur14)
-                        -> addApprenti($utilisateur15);
+                        -> setPassword('0000');
+                        // -> addApprenti($utilisateur14)
+                        // -> addApprenti($utilisateur15);
         $manager->persist($utilisateur22);
 
+//fixture formation
+        $formation1 = new Formation;
+        $formation1 -> setNom('maintenance informatique')
+                        -> addApprenant($utilisateur11);
+        $manager -> persist($formation1);
 
+        $formation2 = new Formation;
+        $formation2 -> setNom('gestion administration');
+        $manager -> persist($formation2);
 
 
 
