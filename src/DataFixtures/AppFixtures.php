@@ -47,7 +47,7 @@ class AppFixtures extends Fixture
                         -> setPrenom('Gabriel')
                         -> setEmail('gmartin@mail.com')
                         -> setPassword('0000')
-                        // -> setRoles('');
+                        -> setRoles(['prof'])
                         -> addMatiere($matiere1)
                         -> addMatiere($matiere4);
         $manager->persist($utilisateur1);
@@ -57,7 +57,7 @@ class AppFixtures extends Fixture
                         -> setPrenom('Michelle')
                         -> setEmail('mduchemin@mail.com')
                         -> setPassword('0000')
-                        // -> setRoles('');
+                        -> setRoles(['prof'])
                         -> addMatiere($matiere2);
         $manager->persist($utilisateur2);
         $utilisateur3 = new Utilisateur;
@@ -65,7 +65,7 @@ class AppFixtures extends Fixture
                         -> setPrenom('Alain')
                         -> setEmail('agagnard@mail.fr')
                         -> setPassword('0000')
-                        // -> setRoles('');
+                        -> setRoles(['prof'])
                         -> addMatiere($matiere3);
         $manager->persist($utilisateur3);
 
@@ -75,6 +75,7 @@ class AppFixtures extends Fixture
         $utilisateur11 -> setNom('lefèvre')
                         -> setPrenom('augustin')
                         -> setEmail('alefevre@mail.fr')
+                        -> setRoles(['apprenant'])
                         -> setPassword('0000');
         $manager->persist($utilisateur11);
 
@@ -82,26 +83,53 @@ class AppFixtures extends Fixture
         $utilisateur12 -> setNom('Dubois')
                         -> setPrenom('Lou')
                         -> setEmail('ldubois@mail.fr')
+                        -> setRoles(['apprenant'])
                         -> setPassword('0000');
         $manager->persist($utilisateur12);
         $utilisateur13 = new Utilisateur;
         $utilisateur13 -> setNom('Martin')
                         -> setPrenom('Gabriel')
                         -> setEmail('gmartin@mail.fr')
+                        -> setRoles(['apprenant'])
                         -> setPassword('0000');
         $manager->persist($utilisateur13);
         $utilisateur14 = new Utilisateur;
         $utilisateur14 -> setNom('Fontaine')
                         -> setPrenom('juliette')
                         -> setEmail('jfontaine@mail.fr')
+                        -> setRoles(['apprenant'])
                         -> setPassword('0000');
         $manager->persist($utilisateur14);
         $utilisateur15 = new Utilisateur;
         $utilisateur15 -> setNom('Lopez')
                         -> setPrenom('Amelia')
                         -> setEmail('alopez@mail.fr')
+                        -> setRoles(['apprenant'])
                         -> setPassword('0000');
         $manager->persist($utilisateur15);
+
+//fixture tuteurs
+        $utilisateur21 = new Utilisateur;
+        $utilisateur21 -> setNom('Dubois')
+                        -> setPrenom('Raphaël')
+                        -> setEmail('rdubois@mail.fr')
+                        -> setRoles(['tuteur'])
+                        -> setPassword('0000')
+                        -> addApprenti($utilisateur11)
+                        -> addApprenti($utilisateur12)
+                        -> addApprenti($utilisateur13);
+                        
+        $manager->persist($utilisateur21);
+
+        $utilisateur22 = new Utilisateur;
+        $utilisateur22 -> setNom('Larnis')
+                        -> setPrenom('Sarah')
+                        -> setEmail('slarnis@mail.fr')
+                        -> setRoles(['tuteur'])
+                        -> setPassword('0000')
+                        -> addApprenti($utilisateur14)
+                        -> addApprenti($utilisateur15);
+        $manager->persist($utilisateur22);
 
 
 

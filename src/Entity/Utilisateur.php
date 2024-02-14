@@ -44,10 +44,17 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: AvoirNote::class, mappedBy: 'apprenants')]
     private Collection $avoirNotes;
 
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'apprentis')]
+    private ?self $tuteur = null;
+
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'tuteur')]
+    private Collection $apprentis;
+
     public function __construct()
     {
         $this->matieres = new ArrayCollection();
         $this->avoirNotes = new ArrayCollection();
+        $this->apprentis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,6 +217,48 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($avoirNote->getApprenants() === $this) {
                 $avoirNote->setApprenants(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTuteur(): ?self
+    {
+        return $this->tuteur;
+    }
+
+    public function setTuteur(?self $tuteur): static
+    {
+        $this->tuteur = $tuteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getApprentis(): Collection
+    {
+        return $this->apprentis;
+    }
+
+    public function addApprenti(self $apprenti): static
+    {
+        if (!$this->apprentis->contains($apprenti)) {
+            $this->apprentis->add($apprenti);
+            $apprenti->setTuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApprenti(self $apprenti): static
+    {
+        if ($this->apprentis->removeElement($apprenti)) {
+            // set the owning side to null (unless already changed)
+            if ($apprenti->getTuteur() === $this) {
+                $apprenti->setTuteur(null);
             }
         }
 
