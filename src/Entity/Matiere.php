@@ -24,14 +24,13 @@ class Matiere
     #[ORM\OneToMany(targetEntity: AvoirNote::class, mappedBy: 'matieres')]
     private Collection $avoirNotes;
 
-    #[ORM\ManyToMany(targetEntity: FairePartie::class, mappedBy: 'matieres')]
-    private Collection $faireParties;
+    #[ORM\OneToOne(mappedBy: 'matiere', cascade: ['persist', 'remove'])]
+    private ?Programme $programme = null;
 
 
     public function __construct()
     {
         $this->avoirNotes = new ArrayCollection();
-        $this->faireParties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,31 +92,27 @@ class Matiere
         return $this;
     }
 
-    /**
-     * @return Collection<int, FairePartie>
-     */
-    public function getFaireParties(): Collection
+    public function getProgramme(): ?Programme
     {
-        return $this->faireParties;
+        return $this->programme;
     }
 
-    public function addFaireParty(FairePartie $faireParty): static
+    public function setProgramme(?Programme $programme): static
     {
-        if (!$this->faireParties->contains($faireParty)) {
-            $this->faireParties->add($faireParty);
-            $faireParty->addMatiere($this);
+        // unset the owning side of the relation if necessary
+        if ($programme === null && $this->programme !== null) {
+            $this->programme->setMatiere(null);
         }
+
+        // set the owning side of the relation if necessary
+        if ($programme !== null && $programme->getMatiere() !== $this) {
+            $programme->setMatiere($this);
+        }
+
+        $this->programme = $programme;
 
         return $this;
     }
 
-    public function removeFaireParty(FairePartie $faireParty): static
-    {
-        if ($this->faireParties->removeElement($faireParty)) {
-            $faireParty->removeMatiere($this);
-        }
-
-        return $this;
-    }
 
 }

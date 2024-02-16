@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FORMATION{% endblock %}
+
+{% block body %}
+
+
+
+<div>
+    <h1>information pour la formation {{ formation.nom }}</h1>
+
+            <h2> Liste des matières</h2>
+{% for appr in formation.apprenants %}
+<p>{{appr.nom}}</p>
+{% endfor %}
+
+{% for x in formation.faireParties.matieres %}
+<p>{{x.id}}</p>
+{% endfor %}
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FORMATION{% endblock %}
+
+{% block body %}
+
+
+
+<div>
+    <h1>information pour les formations</h1>
+
+            <h2> Liste de vos matières</h2>
+
+    <ul>    
+        {% for formation in listeFormation %}
+            <li>
+            <a href="{{path("formation", {id : formation.id}) }}"> {{ formation.nom}}</a>
+            </li>
+
+            {# <ul>
+                {% for mat in formation.faireParties.matieres %}
+                    <li>{{mat.nom}}</li>
+                {% endfor %}
+            </ul> #}
+
+        {% endfor %}    
+    </ul>
+
+
+
+
+{% endblock %}

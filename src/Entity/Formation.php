@@ -21,14 +21,13 @@ class Formation
     #[ORM\OneToMany(targetEntity: Utilisateur::class, mappedBy: 'formation')]
     private Collection $apprenants;
 
-    #[ORM\OneToMany(targetEntity: FairePartie::class, mappedBy: 'formations')]
-    private Collection $faireParties;
-
+    #[ORM\OneToMany(targetEntity: Programme::class, mappedBy: 'formation')]
+    private Collection $programmes;
 
     public function __construct()
     {
         $this->apprenants = new ArrayCollection();
-        $this->faireParties = new ArrayCollection();
+        $this->programmes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,33 +78,34 @@ class Formation
     }
 
     /**
-     * @return Collection<int, FairePartie>
+     * @return Collection<int, Programme>
      */
-    public function getFaireParties(): Collection
+    public function getProgrammes(): Collection
     {
-        return $this->faireParties;
+        return $this->programmes;
     }
 
-    public function addFaireParty(FairePartie $faireParty): static
+    public function addProgramme(Programme $programme): static
     {
-        if (!$this->faireParties->contains($faireParty)) {
-            $this->faireParties->add($faireParty);
-            $faireParty->setFormations($this);
+        if (!$this->programmes->contains($programme)) {
+            $this->programmes->add($programme);
+            $programme->setFormation($this);
         }
 
         return $this;
     }
 
-    public function removeFaireParty(FairePartie $faireParty): static
+    public function removeProgramme(Programme $programme): static
     {
-        if ($this->faireParties->removeElement($faireParty)) {
+        if ($this->programmes->removeElement($programme)) {
             // set the owning side to null (unless already changed)
-            if ($faireParty->getFormations() === $this) {
-                $faireParty->setFormations(null);
+            if ($programme->getFormation() === $this) {
+                $programme->setFormation(null);
             }
         }
 
         return $this;
     }
+
 
 }

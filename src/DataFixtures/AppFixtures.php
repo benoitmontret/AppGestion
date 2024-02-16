@@ -106,10 +106,10 @@ class AppFixtures extends Fixture
                         -> setPrenom('Raphaël')
                         -> setEmail('rdubois@mail.fr')
                         -> setRoles(['tuteur'])
-                        -> setPassword('0000');
-                        // -> addApprenti($utilisateur11)
-                        // -> addApprenti($utilisateur12)
-                        // -> addApprenti($utilisateur13);
+                        -> setPassword('0000')
+                        -> addApprenti($utilisateur11)
+                        -> addApprenti($utilisateur12)
+                        -> addApprenti($utilisateur13);
                         
         $manager->persist($utilisateur21);
 
@@ -118,9 +118,9 @@ class AppFixtures extends Fixture
                         -> setPrenom('Sarah')
                         -> setEmail('slarnis@mail.fr')
                         -> setRoles(['tuteur'])
-                        -> setPassword('0000');
-                        // -> addApprenti($utilisateur14)
-                        // -> addApprenti($utilisateur15);
+                        -> setPassword('0000')
+                        -> addApprenti($utilisateur14)
+                        -> addApprenti($utilisateur15);
         $manager->persist($utilisateur22);
 
 //fixture formation
@@ -138,13 +138,6 @@ class AppFixtures extends Fixture
         $manager -> persist($formation2);
 
 //fixture attribution des matieres aux formation
-        $fairePartie1 = new FairePartie;
-        $fairePartie1 -> setFormations($formation1)
-                        -> addMatieres($matiere1)
-                        -> addMatieres($matiere2)
-                        -> addMatieres($matiere3);
-        $manager -> persist($fairePartie1);
-
 
 
         $manager->flush();

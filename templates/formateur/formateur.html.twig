@@ -7,16 +7,16 @@
 
 
 <div>
-    <h1>information pour le formateur {{ formateur.nom}}</h1>
+    <h1>information pour le formateur {{ formateur.nom }}</h1>
 
-            <h2> Liste de vos matières</h2>
-
-            <ul>
-                {% for mat in formateur.matieres %}
-                    <li>{{ mat.nom }} </li>
-                {% endfor %}
-            </ul>
-
+        <h2> Liste de vos matières</h2>
+        <ul>
+            {% for mat in formateur.matieres %}
+                <li>{{ mat.nom }} 
+                {# {{ mat.faireParties.id }} #}
+                </li>
+            {% endfor %}
+        </ul>
 
 
 
