@@ -24,8 +24,9 @@ class Matiere
     #[ORM\OneToMany(targetEntity: AvoirNote::class, mappedBy: 'matieres')]
     private Collection $avoirNotes;
 
-    #[ORM\OneToMany(targetEntity: FairePartie::class, mappedBy: 'matieres')]
+    #[ORM\ManyToMany(targetEntity: FairePartie::class, mappedBy: 'matieres')]
     private Collection $faireParties;
+
 
     public function __construct()
     {
@@ -104,7 +105,7 @@ class Matiere
     {
         if (!$this->faireParties->contains($faireParty)) {
             $this->faireParties->add($faireParty);
-            $faireParty->setMatieres($this);
+            $faireParty->addMatiere($this);
         }
 
         return $this;
@@ -113,12 +114,10 @@ class Matiere
     public function removeFaireParty(FairePartie $faireParty): static
     {
         if ($this->faireParties->removeElement($faireParty)) {
-            // set the owning side to null (unless already changed)
-            if ($faireParty->getMatieres() === $this) {
-                $faireParty->setMatieres(null);
-            }
+            $faireParty->removeMatiere($this);
         }
 
         return $this;
     }
+
 }

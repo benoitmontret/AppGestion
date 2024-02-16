@@ -24,6 +24,7 @@ class Formation
     #[ORM\OneToMany(targetEntity: FairePartie::class, mappedBy: 'formations')]
     private Collection $faireParties;
 
+
     public function __construct()
     {
         $this->apprenants = new ArrayCollection();
@@ -106,4 +107,5 @@ class Formation
 
         return $this;
     }
+
 }

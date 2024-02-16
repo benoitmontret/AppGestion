@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FairePartieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,11 +19,16 @@ class FairePartie
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $programme = null;
 
-    #[ORM\ManyToOne(inversedBy: 'faireParties')]
-    private ?Matiere $matieres = null;
+    #[ORM\ManyToMany(targetEntity: Matiere::class, inversedBy: 'faireParties')]
+    private Collection $matieres;
 
     #[ORM\ManyToOne(inversedBy: 'faireParties')]
     private ?Formation $formations = null;
+
+    public function __construct()
+    {
+        $this->matieres = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -40,14 +47,26 @@ class FairePartie
         return $this;
     }
 
-    public function getMatieres(): ?Matiere
+    /**
+     * @return Collection<int, Matiere>
+     */
+    public function getMatieres(): Collection
     {
         return $this->matieres;
     }
 
-    public function setMatieres(?Matiere $matieres): static
+    public function addMatiere(Matiere $matiere): static
     {
-        $this->matieres = $matieres;
+        if (!$this->matieres->contains($matiere)) {
+            $this->matieres->add($matiere);
+        }
+
+        return $this;
+    }
+
+    public function removeMatiere(Matiere $matiere): static
+    {
+        $this->matieres->removeElement($matiere);
 
         return $this;
     }
