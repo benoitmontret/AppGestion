@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}APPRENANT{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Liste des apprenant</h1>
+
+    <ul>    
+        {% for apprenant in apprenantListe %}
+            <li>
+                <a href="{{path("apprenant", {id : apprenant.id}) }}"> {{ apprenant.nom}}</a>
+                {{ apprenant.prenom }} : {{ apprenant.roles[0]}}
+                {# {{apprenant.formation.nom}} #}
+            </li> 
+
+            
+            {# <ul>
+                {% for appr in apprenant. %}
+                    <li>{{ appr.nom }} </li>
+                {% endfor %}
+            </ul> #}
+        {% endfor %}    
+    </ul>
+ 
+
+</div>
+{% endblock %}

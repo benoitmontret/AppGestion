@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TUTEUR{% endblock %}
+
+{% block body %}
+
+
+
+<div>
+    <h1>information pour le tuteur {{ tuteur.nom }}</h1>
+
+            <h2> Liste de vos apprenants</h2>
+
+            <ul>
+                {% for appr in tuteur.apprentis %}
+                    <li>{{ appr.nom }} </li>
+                {% endfor %}
+            </ul>
+
+
+
+
+{% endblock %}

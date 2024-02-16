@@ -11,7 +11,8 @@
         {% for formateur in formateurListe %}
             <li>
             <a href="{{path("formateur", {id : formateur.id}) }}"> {{ formateur.nom}}</a>
-            {{ formateur.prenom }}  / {{formateur.email}}</li>
+            {{ formateur.prenom }} {{formateur.email}} : {{ formateur.roles[0]}}
+            </li>
             <ul>
                 {% for mat in formateur.matieres %}
                     <li>{{ mat.nom }} </li>
@@ -19,17 +20,7 @@
             </ul>
         {% endfor %}    
     </ul>
-    {# <ul>
-        {% for joueur in listeJoueurs %}
-            <li>
-            <a href="{{ path("infoJoueur", {id : joueur.id}) }}"> {{ joueur.prenom }} {{ joueur.nom}} / {{joueur.email}}</a></li>
-            <ul>
-                {% for v in joueur.voiture %}
-                    <li>{{ v.marque }} / {{ v.modele }}</li>
-                {% endfor %}
-            </ul>
-        {% endfor %}    
-    </ul> #}
+
 
 </div>
 {% endblock %}

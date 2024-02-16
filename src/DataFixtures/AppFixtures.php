@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Matiere;
 use App\Entity\Formation;
+use App\Entity\FairePartie;
 use App\Entity\Utilisateur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -105,10 +106,10 @@ class AppFixtures extends Fixture
                         -> setPrenom('Raphaël')
                         -> setEmail('rdubois@mail.fr')
                         -> setRoles(['tuteur'])
-                        -> setPassword('0000')
-                        -> addApprenti($utilisateur11)
-                        -> addApprenti($utilisateur12)
-                        -> addApprenti($utilisateur13);
+                        -> setPassword('0000');
+                        // -> addApprenti($utilisateur11)
+                        // -> addApprenti($utilisateur12)
+                        // -> addApprenti($utilisateur13);
                         
         $manager->persist($utilisateur21);
 
@@ -125,13 +126,24 @@ class AppFixtures extends Fixture
 //fixture formation
         $formation1 = new Formation;
         $formation1 -> setNom('maintenance informatique')
-                        -> addApprenant($utilisateur11);
+                        -> addApprenant($utilisateur11)
+                        -> addApprenant($utilisateur12)
+                        -> addApprenant($utilisateur13);
         $manager -> persist($formation1);
 
         $formation2 = new Formation;
-        $formation2 -> setNom('gestion administration');
+        $formation2 -> setNom('gestion administration')
+                        -> addApprenant($utilisateur14)
+                        -> addApprenant($utilisateur15);
         $manager -> persist($formation2);
 
+//fixture attribution des matieres aux formation
+        $fairePartie1 = new FairePartie;
+        $fairePartie1 -> setFormations($formation1)
+                        -> addMatieres($matiere1)
+                        -> addMatieres($matiere2)
+                        -> addMatieres($matiere3);
+        $manager -> persist($fairePartie1);
 
 
 

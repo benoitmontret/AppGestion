@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TUTEUR{% endblock %}
+
+{% block body %}
+
+<div>
+    <h1>Liste des tuteur</h1>
+
+    <ul>    
+        {% for tuteur in tuteurListe %}
+            <li>
+            <a href="{{path("tuteur", {id : tuteur.id}) }}"> {{ tuteur.nom}}</a>
+            {{ tuteur.prenom }}  : {{ tuteur.roles[0]}}
+            </li> 
+
+            <ul>
+                {% for appr in tuteur.apprentis %}
+                    <li>{{ appr.nom }} </li>
+                {% endfor %}
+            </ul>
+        {% endfor %}    
+    </ul>
+ 
+
+</div>
+{% endblock %}
