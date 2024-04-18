@@ -21,13 +21,15 @@ class Formation
     #[ORM\OneToMany(targetEntity: Utilisateur::class, mappedBy: 'formation')]
     private Collection $apprenants;
 
-    #[ORM\OneToMany(targetEntity: Programme::class, mappedBy: 'formation')]
-    private Collection $programmes;
+
+    #[ORM\OneToMany(targetEntity: Module::class, mappedBy: 'formation')]
+    private Collection $modules;
+
 
     public function __construct()
     {
         $this->apprenants = new ArrayCollection();
-        $this->programmes = new ArrayCollection();
+        $this->modules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -78,29 +80,29 @@ class Formation
     }
 
     /**
-     * @return Collection<int, Programme>
+     * @return Collection<int, Module>
      */
-    public function getProgrammes(): Collection
+    public function getModules(): Collection
     {
-        return $this->programmes;
+        return $this->modules;
     }
 
-    public function addProgramme(Programme $programme): static
+    public function addModule(Module $module): static
     {
-        if (!$this->programmes->contains($programme)) {
-            $this->programmes->add($programme);
-            $programme->setFormation($this);
+        if (!$this->modules->contains($module)) {
+            $this->modules->add($module);
+            $module->setFormation($this);
         }
 
         return $this;
     }
 
-    public function removeProgramme(Programme $programme): static
+    public function removeModule(Module $module): static
     {
-        if ($this->programmes->removeElement($programme)) {
+        if ($this->modules->removeElement($module)) {
             // set the owning side to null (unless already changed)
-            if ($programme->getFormation() === $this) {
-                $programme->setFormation(null);
+            if ($module->getFormation() === $this) {
+                $module->setFormation(null);
             }
         }
 

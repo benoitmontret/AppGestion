@@ -2,8 +2,11 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Module;
 use App\Entity\Matiere;
+use App\Entity\AvoirNote;
 use App\Entity\Formation;
+use App\Entity\Programme;
 use App\Entity\FairePartie;
 use App\Entity\Utilisateur;
 use Doctrine\Persistence\ObjectManager;
@@ -30,6 +33,28 @@ class AppFixtures extends Fixture
         $matiere4 = new Matiere;
         $matiere4 -> setNom('Anglais');
         $manager -> persist($matiere4);
+
+//fixture module (=matiere affecté d'un programme)
+        $module1 = new Module;
+        $module1 -> setMatiere($matiere1)
+                -> setProgramme('initiation 101');
+        $manager -> persist($module1);
+        $module2 = new Module;
+        $module2 -> setMatiere($matiere2)
+                -> setProgramme('français 101');
+        $manager -> persist($module2);
+        $module3 = new Module;
+        $module3 -> setMatiere($matiere2)
+                -> setProgramme('Français 102');
+        $manager -> persist($module3);
+        $module4 = new Module;
+        $module4 -> setMatiere($matiere3)
+                -> setProgramme('math 101');
+        $manager -> persist($module4);
+        $module5 = new Module;
+        $module5 -> setMatiere($matiere4)
+                -> setProgramme('anglais 101');
+        $manager -> persist($module5);
 
 
 
@@ -110,7 +135,7 @@ class AppFixtures extends Fixture
                         -> addApprenti($utilisateur11)
                         -> addApprenti($utilisateur12)
                         -> addApprenti($utilisateur13);
-                        
+
         $manager->persist($utilisateur21);
 
         $utilisateur22 = new Utilisateur;
@@ -128,16 +153,37 @@ class AppFixtures extends Fixture
         $formation1 -> setNom('maintenance informatique')
                         -> addApprenant($utilisateur11)
                         -> addApprenant($utilisateur12)
-                        -> addApprenant($utilisateur13);
+                        -> addApprenant($utilisateur13)
+                        -> addModule($module1)
+                        -> addModule($module3);
         $manager -> persist($formation1);
 
         $formation2 = new Formation;
         $formation2 -> setNom('gestion administration')
                         -> addApprenant($utilisateur14)
-                        -> addApprenant($utilisateur15);
+                        -> addApprenant($utilisateur15)
+                        -> addModule($module2)
+                        -> addModule($module4)
+                        -> addModule($module5);
         $manager -> persist($formation2);
 
-//fixture attribution des matieres aux formation
+//fixture note
+        $note1 = new AvoirNote;
+        $note1 -> setNote('12')
+                -> setApprenants($utilisateur11)
+                -> setMatieres($matiere1);
+        $manager -> persist($note1);
+        $note2 = new AvoirNote;
+        $note2 -> setNote('15')
+                -> setApprenants($utilisateur11)
+                -> setMatieres($matiere2);
+        $manager -> persist($note2);
+        $note3 = new AvoirNote;
+        $note3 -> setNote('14')
+                -> setApprenants($utilisateur12)
+                -> setMatieres($matiere1);
+        $manager -> persist($note3);
+
 
 
         $manager->flush();

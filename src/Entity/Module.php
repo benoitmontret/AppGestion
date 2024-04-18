@@ -2,43 +2,34 @@
 
 namespace App\Entity;
 
-use App\Repository\ProgrammeRepository;
+use App\Repository\ModuleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProgrammeRepository::class)]
-class Programme
+#[ORM\Entity(repositoryClass: ModuleRepository::class)]
+class Module
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $module = null;
 
-    #[ORM\OneToOne(inversedBy: 'programme', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'modules')]
     private ?Matiere $matiere = null;
 
-    #[ORM\ManyToOne(inversedBy: 'programmes')]
+    #[ORM\ManyToOne(inversedBy: 'modules')]
     private ?Formation $formation = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $programme = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getModule(): ?string
-    {
-        return $this->module;
-    }
 
-    public function setModule(?string $module): static
-    {
-        $this->module = $module;
-
-        return $this;
-    }
 
     public function getMatiere(): ?Matiere
     {
@@ -60,6 +51,18 @@ class Programme
     public function setFormation(?Formation $formation): static
     {
         $this->formation = $formation;
+
+        return $this;
+    }
+
+    public function getProgramme(): ?string
+    {
+        return $this->programme;
+    }
+
+    public function setProgramme(?string $programme): static
+    {
+        $this->programme = $programme;
 
         return $this;
     }

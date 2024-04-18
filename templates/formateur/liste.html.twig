@@ -12,6 +12,7 @@
             <li>
             <a href="{{path("formateur", {id : formateur.id}) }}"> {{ formateur.nom}}</a>
             {{ formateur.prenom }} {{formateur.email}} : {{ formateur.roles[0]}}
+
             </li>
             <ul>
                 {% for mat in formateur.matieres %}

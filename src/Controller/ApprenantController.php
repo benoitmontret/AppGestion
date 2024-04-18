@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
+
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,7 @@ class ApprenantController extends AbstractController
         public function apprenantListe(EntityManagerInterface $manager ): Response
         {
             $apprenantRepo = $manager->getRepository (Utilisateur::class);
-            $apprenantListe = $apprenantRepo->findAll();
+            $apprenantListe = $apprenantRepo->findAll( );
     
             return $this->render('apprenant/liste.html.twig', 
             [
@@ -35,7 +36,7 @@ class ApprenantController extends AbstractController
         #[Route('/apprenant/{id}', name: 'apprenant')]
         public function apprenant(Utilisateur $apprenant,EntityManagerInterface $manager): Response
         {
-        
+            
             return $this->render('apprenant/apprenant.html.twig', [
                 "apprenant" => $apprenant
             ]);

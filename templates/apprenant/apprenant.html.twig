@@ -4,18 +4,31 @@
 
 {% block body %}
 
-
-
 <div>
-    <h1>information pour l'apprenant {{ apprenant.nom }}</h1>
+    <h1>information pour l'apprenant {{ apprenant.nom }} {{ apprenant.prenom }}</h1>
+    <h2>Pour la Formation : {{ apprenant.formation.nom }}</h2>
+    <h2> Liste de vos notes / matières</h2>
 
-            <h2> Liste de vos matières</h2>
+    <ul>
+    {# on passe en revu les matiere de l'apprenant #}
+        {% for mod in apprenant.formation.modules %}
+            <li>
+            <a href="{{path("programme", {id : mod.id}) }}"> {{ mod.matiere.nom}}</a> : 
 
-            {# <ul>
-                {% for appr in apprenant.apprentis %}
-                    <li>{{ appr.nom }} </li>
+    {# on parcour les notes correspondant a la matiere et si c'est celle de l'apprenant on l'affiche #}
+                {% for note in mod.matiere.avoirNotes %}
+                {% if note.apprenants == apprenant %}
+                    {{ note.note }}
+                {% endif %}
                 {% endfor %}
-            </ul> #}
+
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
+
 
 
 

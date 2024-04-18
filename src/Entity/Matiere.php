@@ -24,13 +24,16 @@ class Matiere
     #[ORM\OneToMany(targetEntity: AvoirNote::class, mappedBy: 'matieres')]
     private Collection $avoirNotes;
 
-    #[ORM\OneToOne(mappedBy: 'matiere', cascade: ['persist', 'remove'])]
-    private ?Programme $programme = null;
+
+    #[ORM\OneToMany(targetEntity: Module::class, mappedBy: 'matiere')]
+    private Collection $modules;
 
 
     public function __construct()
     {
         $this->avoirNotes = new ArrayCollection();
+        $this->formation = new ArrayCollection();
+        $this->modules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,24 +95,63 @@ class Matiere
         return $this;
     }
 
-    public function getProgramme(): ?Programme
+
+    /**
+     * @return Collection<int, Module>
+     */
+    public function getFormation(): Collection
     {
-        return $this->programme;
+        return $this->formation;
     }
 
-    public function setProgramme(?Programme $programme): static
+    public function addFormation(Module $formation): static
     {
-        // unset the owning side of the relation if necessary
-        if ($programme === null && $this->programme !== null) {
-            $this->programme->setMatiere(null);
+        if (!$this->formation->contains($formation)) {
+            $this->formation->add($formation);
+            $formation->setMatiere($this);
         }
 
-        // set the owning side of the relation if necessary
-        if ($programme !== null && $programme->getMatiere() !== $this) {
-            $programme->setMatiere($this);
+        return $this;
+    }
+
+    public function removeFormation(Module $formation): static
+    {
+        if ($this->formation->removeElement($formation)) {
+            // set the owning side to null (unless already changed)
+            if ($formation->getMatiere() === $this) {
+                $formation->setMatiere(null);
+            }
         }
 
-        $this->programme = $programme;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Module>
+     */
+    public function getModules(): Collection
+    {
+        return $this->modules;
+    }
+
+    public function addModule(Module $module): static
+    {
+        if (!$this->modules->contains($module)) {
+            $this->modules->add($module);
+            $module->setMatiere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModule(Module $module): static
+    {
+        if ($this->modules->removeElement($module)) {
+            // set the owning side to null (unless already changed)
+            if ($module->getMatiere() === $this) {
+                $module->setMatiere(null);
+            }
+        }
 
         return $this;
     }
