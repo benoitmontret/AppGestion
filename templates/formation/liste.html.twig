@@ -15,12 +15,9 @@
             <li>
             <a href="{{path("formation", {id : formation.id}) }}"> {{ formation.nom}}</a>
             </li>
-
-            {# <ul>
-                {% for mat in formation.faireParties.matieres %}
-                    <li>{{mat.nom}}</li>
-                {% endfor %}
-            </ul> #}
+    {% for mod in formation.modules %}
+        <p>{{mod.matiere.nom}} : {{mod.programme}}</p>
+    {% endfor %}
 
         {% endfor %}    
     </ul>

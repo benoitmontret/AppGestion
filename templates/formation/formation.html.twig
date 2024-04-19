@@ -16,7 +16,6 @@
     {% for mod in formation.modules %}
         <p>{{mod.matiere.nom}} prog : {{mod.programme}}</p>
         <a href="{{path("programme", {id : mod.id}) }}"> {{ mod.matiere.nom}}</a><br>
-
     {% endfor %}
 
 

@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Module;
+use App\Entity\Formation;
 use App\Entity\Utilisateur;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -36,10 +38,29 @@ class FormateurController extends AbstractController
     #[Route('/formateur/{id}', name: 'formateur')]
     public function formateur(Utilisateur $formateur,EntityManagerInterface $manager): Response
     {
-    
+        $formationRepo = $manager->getRepository (Formation::class);
+        $listeFormation = $formationRepo->findAll();
+
         return $this->render('formateur/formateur.html.twig', [
-            "formateur" => $formateur
+            "formateur" => $formateur,
+            'listeFormation' => $listeFormation
         ]);
     }
-}
 
+    #[Route('/formateur_prog/{id}', name : 'formateur_prog')]
+    public function formateur_prog(Module $module,EntityManagerInterface $manager): Response
+    {
+        return $this->render('formateur/prog.html.twig', [
+            "module" => $module
+        ]);
+    }
+
+    #[Route('/formateur_note/{id}', name: 'formateur_note')]
+    public function formateur_note(Module $module,EntityManagerInterface $manager): Response
+    {
+        return $this->render('formateur/note.html.twig', [
+            "module" => $module
+        ]);
+    }
+
+}

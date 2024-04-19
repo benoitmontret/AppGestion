@@ -4,19 +4,42 @@
 
 {% block body %}
 
-
-
-<div>
     <h1>information pour le formateur {{ formateur.nom }}</h1>
 
-        <h2> Liste de vos matières</h2>
-        <ul>
-            {% for mat in formateur.matieres %}
-                <li>{{ mat.nom }} 
-                {# {{ mat.faireParties.id }} #}
-                </li>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Formation</th>
+                <th>matières</th>
+                <th>Voir</th>
+                <th>Mettre</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation in listeFormation %}
+            {% for mod in formation.modules %}
+                {% if mod.matiere.formateurs == formateur %}
+                <tr>
+                    <td>{{ formation.nom }}
+                    </td>
+
+                    <td>{{ mod.matiere.nom }}
+                    </td>
+
+                    <td><a href="{{path("formateur_prog", {id : mod.id}) }}">Programme</a>
+                    </td>
+
+                    <td>
+                    <a href="{{path("formateur_note", {id : mod.id}) }}">Notes</a>
+                    </td>
+                </tr>
+                {% endif %}
             {% endfor %}
-        </ul>
+        {% endfor %}    
+
+        </tbody>
+    </table>
 
 
 

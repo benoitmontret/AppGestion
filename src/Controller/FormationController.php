@@ -42,7 +42,7 @@ class FormationController extends AbstractController
         ]);
     }
 
-    // Afficher le programme d'une matiere
+    // Afficher le programme d'un module
     #[Route('/programme/{id}', name : 'programme')]
     public function programme(Module $module,EntityManagerInterface $manager): Response
     {
