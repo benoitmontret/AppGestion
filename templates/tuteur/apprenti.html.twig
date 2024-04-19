@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}APPRENANT{% endblock %}
+{% block title %}TUTEUR{% endblock %}
 
 {% block body %}
 
 <div>
-    <h1>information pour l'apprenant {{ apprenant.nom }} {{ apprenant.prenom }}</h1>
-    <h2>Notes pour la Formation : {{ apprenant.formation.nom }}</h2>
+    <h1>Notes de votre apprenti {{ apprenti.nom }} {{ apprenti.prenom }}</h1>
+    <h2>pour la Formation : {{ apprenti.formation.nom }}</h2>
 
     <table>
         <thead>
@@ -16,15 +16,15 @@
             </tr>
         </thead>
         <tbody>
-            {# on passe en revu les matiere de l'apprenant #}
-            {% for mod in apprenant.formation.modules %}
+            {# on passe en revu les matiere de l'apprenti #}
+            {% for mod in apprenti.formation.modules %}
                 <tr>
                     <td><a href="{{path("programme", {id : mod.id}) }}"> {{ mod.matiere.nom}}</a></td>
 
-    {# on parcour les notes correspondant a la matiere et si c'est celle de l'apprenant on l'affiche #}
+    {# on parcour les notes correspondant a la matiere et si c'est celle de l'apprenti on l'affiche #}
                     <td>
                         {% for note in mod.matiere.avoirNotes %}
-                        {% if note.apprenants == apprenant %}
+                        {% if note.apprenants == apprenti %}
                             {{ note.note }}
                         {% endif %}
                         {% endfor %}

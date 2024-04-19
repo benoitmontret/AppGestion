@@ -7,23 +7,17 @@
 <div>
     <h1>Liste des apprenant</h1>
 
-    <ul>    
+    <ul>
         {% for apprenant in apprenantListe %}
+            {% if apprenant.roles[0] == 'apprenant' %}
             <li>
-                <a href="{{path("apprenant", {id : apprenant.id}) }}"> {{ apprenant.nom}}</a>
-                {{ apprenant.prenom }} : {{ apprenant.roles[0]}}
-                {# {{apprenant.formation.nom}} #}
+                <a href="{{path("apprenant", {id : apprenant.id}) }}"> {{ apprenant.nom }} {{ apprenant.prenom }}</a>
+                {# : {{ apprenant.roles[0]}} #}
             </li> 
-
-            
-            {# <ul>
-                {% for appr in apprenant. %}
-                    <li>{{ appr.nom }} </li>
-                {% endfor %}
-            </ul> #}
+            {% endif %}
         {% endfor %}    
     </ul>
- 
+
 
 </div>
 {% endblock %}

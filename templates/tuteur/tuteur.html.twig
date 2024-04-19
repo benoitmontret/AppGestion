@@ -9,15 +9,26 @@
 <div>
     <h1>information pour le tuteur {{ tuteur.nom }}</h1>
 
-            <h2> Liste de vos apprenants</h2>
+    <h2> Liste de vos apprentis</h2>
 
-            <ul>
-                {% for appr in tuteur.apprentis %}
-                    <li>{{ appr.nom }} </li>
-                {% endfor %}
-            </ul>
-
-
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Formation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for apprenti in tuteur.apprentis %}
+                <tr>
+                    <td><a href="{{path("apprenti", {id : apprenti.id}) }}"> {{ apprenti.nom}}</a></td>
+                    <td>{{ apprenti.prenom }}</td>
+                    <td>{{ apprenti.formation.nom }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
 
 {% endblock %}

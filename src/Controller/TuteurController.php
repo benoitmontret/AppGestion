@@ -41,4 +41,13 @@ class TuteurController extends AbstractController
         ]);
     }
 
+    #[Route('/apprenti/{id}', name: 'apprenti')]
+    public function apprenti(Utilisateur $apprenti,EntityManagerInterface $manager): Response
+    {
+    
+        return $this->render('tuteur/apprenti.html.twig', [
+            "apprenti" => $apprenti
+        ]);
+    }
+
 }

@@ -21,11 +21,10 @@ class AppFixtures extends Fixture
 
 //fixture matiere
         $matiere1 = new Matiere;
-        $matiere1 -> setNom('Tronc commun');
+        $matiere1 -> setNom('Français');
         $manager -> persist($matiere1);
-
         $matiere2 = new Matiere;
-        $matiere2 -> setNom('Français');
+        $matiere2 -> setNom('Hist-Géo');
         $manager -> persist($matiere2);
         $matiere3 = new Matiere;
         $matiere3 -> setNom('Math');
@@ -37,15 +36,15 @@ class AppFixtures extends Fixture
 //fixture module (=matiere affecté d'un programme)
         $module1 = new Module;
         $module1 -> setMatiere($matiere1)
-                -> setProgramme('initiation 101');
+                -> setProgramme('Programme de français de maintenance informatique');
         $manager -> persist($module1);
         $module2 = new Module;
-        $module2 -> setMatiere($matiere2)
-                -> setProgramme('français 101');
+        $module2 -> setMatiere($matiere1)
+                -> setProgramme('Programme de français de gestion administration');
         $manager -> persist($module2);
         $module3 = new Module;
         $module3 -> setMatiere($matiere2)
-                -> setProgramme('Français 102');
+                -> setProgramme('histoire géographie 101');
         $manager -> persist($module3);
         $module4 = new Module;
         $module4 -> setMatiere($matiere3)
@@ -89,8 +88,8 @@ class AppFixtures extends Fixture
 
 //fixture apprenants
         $utilisateur11 = new Utilisateur;
-        $utilisateur11 -> setNom('lefèvre')
-                        -> setPrenom('augustin')
+        $utilisateur11 -> setNom('Lefèvre')
+                        -> setPrenom('Augustin')
                         -> setEmail('alefevre@mail.fr')
                         -> setRoles(['apprenant'])
                         -> setPassword('0000');
@@ -112,7 +111,7 @@ class AppFixtures extends Fixture
         $manager->persist($utilisateur13);
         $utilisateur14 = new Utilisateur;
         $utilisateur14 -> setNom('Fontaine')
-                        -> setPrenom('juliette')
+                        -> setPrenom('Juliette')
                         -> setEmail('jfontaine@mail.fr')
                         -> setRoles(['apprenant'])
                         -> setPassword('0000');
@@ -150,21 +149,21 @@ class AppFixtures extends Fixture
 
 //fixture formation
         $formation1 = new Formation;
-        $formation1 -> setNom('maintenance informatique')
+        $formation1 -> setNom('Maintenance informatique')
                         -> addApprenant($utilisateur11)
-                        -> addApprenant($utilisateur12)
                         -> addApprenant($utilisateur13)
+                        -> addApprenant($utilisateur15)
                         -> addModule($module1)
-                        -> addModule($module3);
+                        -> addModule($module3)
+                        -> addModule($module5);
         $manager -> persist($formation1);
 
         $formation2 = new Formation;
-        $formation2 -> setNom('gestion administration')
+        $formation2 -> setNom('Gestion administration')
+                        -> addApprenant($utilisateur12)
                         -> addApprenant($utilisateur14)
-                        -> addApprenant($utilisateur15)
                         -> addModule($module2)
-                        -> addModule($module4)
-                        -> addModule($module5);
+                        -> addModule($module4);
         $manager -> persist($formation2);
 
 //fixture note
@@ -176,15 +175,19 @@ class AppFixtures extends Fixture
         $note2 = new AvoirNote;
         $note2 -> setNote('15')
                 -> setApprenants($utilisateur11)
-                -> setMatieres($matiere2);
+                -> setMatieres($matiere4);
         $manager -> persist($note2);
+
         $note3 = new AvoirNote;
-        $note3 -> setNote('14')
+        $note3 -> setNote('8.75')
                 -> setApprenants($utilisateur12)
                 -> setMatieres($matiere1);
         $manager -> persist($note3);
-
-
+        $note4 = new AvoirNote;
+        $note4 -> setNote('9.55')
+                -> setApprenants($utilisateur12)
+                -> setMatieres($matiere3);
+        $manager -> persist($note4);
 
         $manager->flush();
         }

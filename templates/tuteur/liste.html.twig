@@ -9,16 +9,19 @@
 
     <ul>    
         {% for tuteur in tuteurListe %}
+            {% if tuteur.roles[0] == 'tuteur' %}
+
             <li>
-            <a href="{{path("tuteur", {id : tuteur.id}) }}"> {{ tuteur.nom}}</a>
-            {{ tuteur.prenom }}  : {{ tuteur.roles[0]}}
+            <a href="{{path("tuteur", {id : tuteur.id}) }}"> {{ tuteur.nom}} {{ tuteur.prenom }}</a>
+            {# : {{ tuteur.roles[0]}} #}
             </li> 
 
-            <ul>
-                {% for appr in tuteur.apprentis %}
-                    <li>{{ appr.nom }} </li>
-                {% endfor %}
-            </ul>
+                <ul>
+                    {% for appr in tuteur.apprentis %}
+                        <li>{{ appr.nom }} </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endfor %}    
     </ul>
 

@@ -36,7 +36,7 @@ class ApprenantController extends AbstractController
         #[Route('/apprenant/{id}', name: 'apprenant')]
         public function apprenant(Utilisateur $apprenant,EntityManagerInterface $manager): Response
         {
-            
+
             return $this->render('apprenant/apprenant.html.twig', [
                 "apprenant" => $apprenant
             ]);

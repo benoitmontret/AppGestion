@@ -9,16 +9,20 @@
 
     <ul>    
         {% for formateur in formateurListe %}
+            {% if formateur.roles[0] == 'prof' %}
             <li>
-            <a href="{{path("formateur", {id : formateur.id}) }}"> {{ formateur.nom}}</a>
-            {{ formateur.prenom }} {{formateur.email}} : {{ formateur.roles[0]}}
-
+                <a href="{{path("formateur", {id : formateur.id}) }}"> {{ formateur.nom }} {{ formateur.prenom }}</a>
+                {{formateur.email}}
+                {# : {{ formateur.roles[0]}} #}
             </li>
-            <ul>
-                {% for mat in formateur.matieres %}
-                    <li>{{ mat.nom }} </li>
-                {% endfor %}
-            </ul>
+                <ul>
+                    {% for mat in formateur.matieres %}
+                        <li>{{ mat.nom }} </li>
+                    {% endfor %}
+                </ul>
+
+            </li> 
+            {% endif %}
         {% endfor %}    
     </ul>
 
