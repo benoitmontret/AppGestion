@@ -5,12 +5,14 @@ namespace App\Controller;
 use App\Entity\Module;
 use App\Entity\Formation;
 use App\Entity\Utilisateur;
+use App\Form\ProgrammeType;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Loader\Configurator\form;
 
 class FormateurController extends AbstractController
 {
@@ -63,4 +65,25 @@ class FormateurController extends AbstractController
         ]);
     }
 
+    #[Route('/editProgramme/{id}', name: 'editProgramme')]
+    public function editProgramme(Module $module, EntityManagerInterface $manager, Request $request): Response
+    {
+        $form = $this->createForm(ProgrammeType::class, $module);
+$id = $module->getId();
+// dd($id);
+        $form-> handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $module =$form ->getData();
+            $manager->persist($module);
+            $manager->flush();
+            $this -> addFlash('success', 'Le programme a été modifié');
+
+
+            return $this->redirectToRoute('formateur_prog', ['id' => $id]);
+        }
+
+        return $this->render('formateur/editProgramme.html.twig', 
+        ["form"=>$form->createView()]
+        );
+    }
 }
