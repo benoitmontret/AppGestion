@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Module;
+use App\Form\NoteType;
 use App\Entity\Formation;
 use App\Entity\Utilisateur;
 use App\Form\ProgrammeType;
@@ -68,9 +69,9 @@ class FormateurController extends AbstractController
     #[Route('/editProgramme/{id}', name: 'editProgramme')]
     public function editProgramme(Module $module, EntityManagerInterface $manager, Request $request): Response
     {
+        $id = $module->getId();
+        
         $form = $this->createForm(ProgrammeType::class, $module);
-$id = $module->getId();
-// dd($id);
         $form-> handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $module =$form ->getData();
@@ -78,11 +79,32 @@ $id = $module->getId();
             $manager->flush();
             $this -> addFlash('success', 'Le programme a été modifié');
 
-
             return $this->redirectToRoute('formateur_prog', ['id' => $id]);
         }
 
         return $this->render('formateur/editProgramme.html.twig', 
+        ["form"=>$form->createView()]
+        );
+    }
+
+    #[Route('/mettreNote/{id}', name: 'mettreNote')]
+    public function mettreNote(Module $module, EntityManagerInterface $manager, Request $request): Response
+    {
+        $id = $module->getId();
+        
+        $form = $this->createForm(NoteType::class, $module);
+        $form-> handleRequest($request);
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $module =$form ->getData();
+        //     $manager->persist($module);
+        //     $manager->flush();
+        //     $this -> addFlash('success', 'Les notes ont  été modifiées');
+
+        //     return $this->redirectToRoute('formateur_prog', ['id' => $id]);
+        // }
+
+        return $this->render('formateur/mettreNote.html.twig', 
         ["form"=>$form->createView()]
         );
     }

@@ -7,7 +7,14 @@
 
     <h1>Modifier le programme :</h1>
 
-    {{ form(form) }}
+    {# {{ form(form) }} #}
 
+{# {{ form_start(form) }} #}
+{{ form_label(form.programme) }}<br>
+{{ form_widget(form.programme) }}
+
+{{ form_row(form.Envoyer) }}
+
+{# {{ form_end(form) }} #}
 
 {% endblock %}
