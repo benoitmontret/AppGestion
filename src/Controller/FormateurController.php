@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Module;
 use App\Form\NoteType;
+use App\Entity\Matiere;
+use App\Entity\AvoirNote;
 use App\Entity\Formation;
 use App\Entity\Utilisateur;
 use App\Form\ProgrammeType;
@@ -41,6 +43,7 @@ class FormateurController extends AbstractController
     #[Route('/formateur/{id}', name: 'formateur')]
     public function formateur(Utilisateur $formateur,EntityManagerInterface $manager): Response
     {
+
         $formationRepo = $manager->getRepository (Formation::class);
         $listeFormation = $formationRepo->findAll();
 
@@ -58,21 +61,15 @@ class FormateurController extends AbstractController
         ]);
     }
 
-    #[Route('/formateur_note/{id}', name: 'formateur_note')]
-    public function formateur_note(Module $module,EntityManagerInterface $manager): Response
-    {
-        return $this->render('formateur/note.html.twig', [
-            "module" => $module
-        ]);
-    }
-
+    
     #[Route('/editProgramme/{id}', name: 'editProgramme')]
     public function editProgramme(Module $module, EntityManagerInterface $manager, Request $request): Response
     {
         $id = $module->getId();
-        
+
         $form = $this->createForm(ProgrammeType::class, $module);
         $form-> handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $module =$form ->getData();
             $manager->persist($module);
@@ -84,28 +81,66 @@ class FormateurController extends AbstractController
 
         return $this->render('formateur/editProgramme.html.twig', 
         ["form"=>$form->createView()]
-        );
+    );
+}
+
+    #[Route('/formateur_note/{id}', name: 'formateur_note')]
+    public function formateur_note(Module $module,EntityManagerInterface $manager): Response
+    {
+        return $this->render('formateur/note.html.twig', [
+            "module" => $module
+        ]);
     }
 
-    #[Route('/mettreNote/{id}', name: 'mettreNote')]
-    public function mettreNote(Module $module, EntityManagerInterface $manager, Request $request): Response
+    #[Route('/modifierNote/{id}', name: 'modifierNote')]
+    public function modifierNote(AvoirNote $note, EntityManagerInterface $manager, Request $request): Response
     {
-        $id = $module->getId();
-        
-        $form = $this->createForm(NoteType::class, $module);
+
+        $form = $this->createForm(NoteType::class, $note);
         $form-> handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note =$form ->getData();
+            $manager->persist($note);
+            $manager->flush();
+            $this -> addFlash('success', 'La note a été modifiée');
+            
+            return $this->redirectToRoute('formateurListe'); //modifier la route par redirection login
+            
+        }
 
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $module =$form ->getData();
-        //     $manager->persist($module);
-        //     $manager->flush();
-        //     $this -> addFlash('success', 'Les notes ont  été modifiées');
-
-        //     return $this->redirectToRoute('formateur_prog', ['id' => $id]);
-        // }
-
-        return $this->render('formateur/mettreNote.html.twig', 
+        return $this->render('formateur/modifierNote.html.twig', 
         ["form"=>$form->createView()]
         );
     }
+
+
+    #[Route('/ajouterNote/{idApp}/{idMat}', name: 'ajouterNote')]
+    public function ajouterNote(int $idApp, int $idMat, EntityManagerInterface $manager, Request $request): Response
+    {
+        $note = new AvoirNote();
+        $apprenant = $manager->getRepository(utilisateur::class)->find($idApp);
+        $matiere = $manager->getRepository(Matiere::class)->find($idMat);
+
+        $note->setApprenants($apprenant);
+        $note->setMatieres($matiere);
+
+        $form = $this->createForm(NoteType::class, $note);
+        $form-> handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note =$form ->getData();
+            $manager->persist($note);
+            $manager->flush();
+            $this -> addFlash('success', 'La note a été ajoutée');
+            
+            return $this->redirectToRoute('formateurListe'); //modifier la route par redirection login
+            
+        }
+
+        return $this->render('formateur/ajouterNote.html.twig', 
+        ["form"=>$form->createView()]
+        );
+    }
+
 }

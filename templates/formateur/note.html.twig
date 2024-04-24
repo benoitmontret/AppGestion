@@ -2,6 +2,7 @@
 
 {% block title %}FORMATEUR-NOTE{% endblock %}
 
+
 {% block body %}
 
 <div>
@@ -25,11 +26,23 @@
                     </td>
 
                     <td>
+                    {% set pasDeNote = true %}
                         {% for note in module.matiere.avoirNotes %}
                         {% if note.apprenants == appr %}
                             {{ note.note }}
-                        {% endif %}
+                    </td>
+                            {% set pasDeNote = false %}
+                    <td>
+                            <a href="{{ path("modifierNote", {id : note.id}) }}"> modifier {{ note.id }}</a>
+                    </td>
+                        {% endif %} 
                         {% endfor %}
+
+                    <td>
+                        {% if pasDeNote %}
+                            <a href="{{ path("ajouterNote", {idApp : appr.id, idMat : module.matiere.id }) }}"> ajouter {{ module.matiere.id }} / {{ appr.id }}</a> 
+
+                        {% endif %}
                     </td>
                 </tr>
         {% endfor %}
@@ -39,8 +52,8 @@
 </div>
 
 <br><br>
-<div>
-    <a href="{{path("mettreNote", {id : module.id}) }}">Modifier les notes</a>
-</div>
+{# <div>
+    <a href="{{path("mettreNote", {id : module.matiere.id}) }}">Modifier les notes</a>
+</div> #}
 
 {% endblock %}
