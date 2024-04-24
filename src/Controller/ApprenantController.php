@@ -11,15 +11,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ApprenantController extends AbstractController
 {
-    #[Route('/apprenant', name: 'app_apprenant')]
-    public function index(): Response
-    {
-        return $this->render('apprenant/index.html.twig', [
-            'controller_name' => 'ApprenantController',
-        ]);
-    }
+    // #[Route('/apprenant', name: 'app_apprenant')]
+    // public function index(): Response
+    // {
+    //     return $this->render('apprenant/index.html.twig', [
+    //         'controller_name' => 'ApprenantController',
+    //     ]);
+    // }
 
-        // recuperation de la liste des apprenants
+        // recuperation de la liste des apprenants route de travail
         #[Route('/apprenant/liste', name: 'apprenantListe')]
         public function apprenantListe(EntityManagerInterface $manager ): Response
         {
@@ -32,7 +32,7 @@ class ApprenantController extends AbstractController
             ]);
         }
     
-    // Afficher les info d'un apprenant
+// Afficher les info d'un apprenant
         #[Route('/apprenant/{id}', name: 'apprenant')]
         public function apprenant(Utilisateur $apprenant,EntityManagerInterface $manager): Response
         {

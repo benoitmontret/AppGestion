@@ -10,15 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TuteurController extends AbstractController
 {
-    #[Route('/tuteur', name: 'app_tuteur')]
-    public function index(): Response
-    {
-        return $this->render('tuteur/index.html.twig', [
-            'controller_name' => 'TuteurController',
-        ]);
-    }
+    // #[Route('/tuteur', name: 'app_tuteur')]
+    // public function index(): Response
+    // {
+    //     return $this->render('tuteur/index.html.twig', [
+    //         'controller_name' => 'TuteurController',
+    //     ]);
+    // }
 
-    // recuperation de la liste des tuteurs
+    // recuperation de la liste des tuteurs route de travail
     #[Route('/tuteur/liste', name: 'tuteurListe')]
     public function tuteurListe(EntityManagerInterface $manager ): Response
     {
@@ -40,7 +40,7 @@ class TuteurController extends AbstractController
             "tuteur" => $tuteur
         ]);
     }
-
+// Afficher les info pour un apprenti du tuteur
     #[Route('/apprenti/{id}', name: 'apprenti')]
     public function apprenti(Utilisateur $apprenti,EntityManagerInterface $manager): Response
     {

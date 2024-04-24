@@ -19,14 +19,15 @@ use Symfony\Component\DependencyInjection\Loader\Configurator\form;
 
 class FormateurController extends AbstractController
 {
-    #[Route('/formateur', name: 'app_formateur')]
-    public function index(): Response
-    {
-        return $this->render('formateur/index.html.twig', [
-            'controller_name' => 'FormateurController',
-        ]);
-    }
-// recuperation de la liste des formateurs
+    // #[Route('/formateur', name: 'app_formateur')]
+    // public function index(): Response
+    // {
+    //     return $this->render('formateur/index.html.twig', [
+    //         'controller_name' => 'FormateurController',
+    //     ]);
+    // }
+
+// recuperation de la liste des formateurs route de travail
     #[Route('/formateur/liste', name: 'formateurListe')]
     public function formateurListe(EntityManagerInterface $manager ): Response
     {
@@ -63,10 +64,8 @@ class FormateurController extends AbstractController
 
     
     #[Route('/editProgramme/{id}', name: 'editProgramme')]
-    public function editProgramme(Module $module, EntityManagerInterface $manager, Request $request): Response
+    public function editProgramme(int $id, Module $module, EntityManagerInterface $manager, Request $request): Response
     {
-        $id = $module->getId();
-
         $form = $this->createForm(ProgrammeType::class, $module);
         $form-> handleRequest($request);
 
@@ -84,10 +83,10 @@ class FormateurController extends AbstractController
     );
 }
 
-    #[Route('/formateur_note/{id}', name: 'formateur_note')]
-    public function formateur_note(Module $module,EntityManagerInterface $manager): Response
+    #[Route('/formateur_notes/{id}', name: 'formateur_notes')]
+    public function formateur_notes(Module $module,EntityManagerInterface $manager): Response
     {
-        return $this->render('formateur/note.html.twig', [
+        return $this->render('formateur/notes.html.twig', [
             "module" => $module
         ]);
     }
