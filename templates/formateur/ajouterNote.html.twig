@@ -5,10 +5,19 @@
 {% block body %}
 
 
-    <h1>Ajouter la note :</h1>
+    <h1>Ajouter la note de {{ note.apprenants.nom }} {{ note.apprenants.prenom }} en {{ note.matieres.nom }} :</h1>
 
-{{ form(form) }}
+{{ form_start(form) }}
 
+{{ form_label(form.note) }}
+{{ form_widget(form.note) }}<br><br>
+{{ form_row(form.Envoyer) }}
+
+<div visibility : hidden>
+{{ form_rest(form) }}
+</div>
+
+{{ form_end(form) }}
 
 
 {% endblock %}

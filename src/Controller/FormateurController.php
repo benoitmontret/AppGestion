@@ -108,8 +108,10 @@ class FormateurController extends AbstractController
             
         }
 
-        return $this->render('formateur/modifierNote.html.twig', 
-        ["form"=>$form->createView()]
+        return $this->render('formateur/modifierNote.html.twig', [
+            "form"=> $form->createView(),
+            "note" => $note
+        ]
         );
     }
 
@@ -137,8 +139,10 @@ class FormateurController extends AbstractController
             
         }
 
-        return $this->render('formateur/ajouterNote.html.twig', 
-        ["form"=>$form->createView()]
+        return $this->render('formateur/ajouterNote.html.twig', [
+            "form"=>$form->createView(),
+            "note" => $note
+        ]
         );
     }
 
