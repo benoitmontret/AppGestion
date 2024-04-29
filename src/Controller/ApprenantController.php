@@ -19,7 +19,7 @@ class ApprenantController extends AbstractController
     //     ]);
     // }
 
-        // recuperation de la liste des apprenants route de travail
+        // recuperation de la liste des apprenants ##route de travail##
         #[Route('/apprenant/liste', name: 'apprenantListe')]
         public function apprenantListe(EntityManagerInterface $manager ): Response
         {

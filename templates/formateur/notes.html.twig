@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for appr in module.formation.apprenants %}
+        {% for appr in module.formation.apprenants %} {# boucle pour lister tous les apprenants d'un module #}
                 <tr>
                     <td>{{ appr.nom }}
                     </td>
@@ -26,12 +26,12 @@
                     </td>
 
                     <td>
-                    {% set pasDeNote = true %}
-                        {% for note in module.matiere.avoirNotes %}
-                        {% if note.apprenants == appr %}
+                    {% set pasDeNote = true %} {# permet à la fin de la boucle 'note' de mettre un lien pour ajouter la note quand il n'y en a pas encore #}
+                        {% for note in module.matiere.avoirNotes %} {# comme avoirNote est une collection de note, on fait une boucle pour passer toutes les notes en revue #}
+                        {% if note.apprenants == appr %} {# test si la note correspond à l'apprenant pour l'afficher #}
                             {{ note.note }}
                     </td>
-                            {% set pasDeNote = false %}
+                            {% set pasDeNote = false %} {# comme il y a une note il ne faut pas mettre de lien'ajouter' #}
                     <td>
                             <a href="{{ path("modifierNote", {id : note.id}) }}"> modifier {{ note.id }}</a>
                     </td>
@@ -52,8 +52,5 @@
 </div>
 
 <br><br>
-{# <div>
-    <a href="{{path("mettreNote", {id : module.matiere.id}) }}">Modifier les notes</a>
-</div> #}
 
 {% endblock %}

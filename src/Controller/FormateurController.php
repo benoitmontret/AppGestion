@@ -27,7 +27,7 @@ class FormateurController extends AbstractController
     //     ]);
     // }
 
-// recuperation de la liste des formateurs route de travail
+// recuperation de la liste des formateurs ##route de travail##
     #[Route('/formateur/liste', name: 'formateurListe')]
     public function formateurListe(EntityManagerInterface $manager ): Response
     {
@@ -54,6 +54,7 @@ class FormateurController extends AbstractController
         ]);
     }
 
+// routes pour afficher et modifier le programme d'une matière pour un formation 
     #[Route('/formateur_prog/{id}', name : 'formateur_prog')]
     public function formateur_prog(Module $module,EntityManagerInterface $manager): Response
     {
@@ -83,6 +84,7 @@ class FormateurController extends AbstractController
     );
 }
 
+// routes pours les notes
     #[Route('/formateur_notes/{id}', name: 'formateur_notes')]
     public function formateur_notes(Module $module,EntityManagerInterface $manager): Response
     {
@@ -91,6 +93,7 @@ class FormateurController extends AbstractController
         ]);
     }
 
+//pour modifier la note il n'y a besoin que de l'id d'AvoirNote puisqu'elle existe déjà la matièere et l'apprenant sont déjà connu
     #[Route('/modifierNote/{id}', name: 'modifierNote')]
     public function modifierNote(AvoirNote $note, EntityManagerInterface $manager, Request $request): Response
     {
@@ -115,7 +118,7 @@ class FormateurController extends AbstractController
         );
     }
 
-
+//pour ajouter une note ils faut les id de la matière et de l'apprenant
     #[Route('/ajouterNote/{idApp}/{idMat}', name: 'ajouterNote')]
     public function ajouterNote(int $idApp, int $idMat, EntityManagerInterface $manager, Request $request): Response
     {
