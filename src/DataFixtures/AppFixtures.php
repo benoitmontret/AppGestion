@@ -35,8 +35,9 @@ class AppFixtures extends Fixture
 
 //fixture module (=matiere affecté d'un programme)
         $module1 = new Module;
-        $module1 -> setMatiere($matiere1)
-                -> setProgramme('Programme de français de maintenance informatique');
+        $module1 -> setMatiere($matiere1);
+                // pour tester une matiere sans programme de définit
+                // -> setProgramme('Programme de français de maintenance informatique');
         $manager -> persist($module1);
         $module2 = new Module;
         $module2 -> setMatiere($matiere1)

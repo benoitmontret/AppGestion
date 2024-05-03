@@ -21,18 +21,13 @@
             {% for mod in formation.modules %}
                 {% if mod.matiere.formateurs == formateur %}
                 <tr>
-                    <td>{{ formation.nom }}
-                    </td>
+                    <td>{{ formation.nom }}</td>
 
-                    <td>{{ mod.matiere.nom }}
-                    </td>
+                    <td>{{ mod.matiere.nom }}</td>
 
-                    <td><a href="{{path("formateur_prog", {id : mod.id}) }}">Programme</a>
-                    </td>
+                    <td><a href="{{path("formateur_prog", {id : mod.id}) }}">Programme</a></td>
 
-                    <td>
-                    <a href="{{path("formateur_notes", {id : mod.id}) }}">Notes</a>
-                    </td>
+                    <td><a href="{{path("formateur_notes", {id : mod.id}) }}">Notes</a></td>
                 </tr>
                 {% endif %}
             {% endfor %}

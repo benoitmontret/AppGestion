@@ -21,11 +21,11 @@
                 <tr>
                     <td><a href="{{path("programme", {id : mod.id}) }}"> {{ mod.matiere.nom}}</a></td>
 
-    {# on parcour les notes correspondant a la matiere et si c'est celle de l'apprenant on l'affiche #}
+    {# on parcourt les notes correspondant a la matiere et si c'est celle de l'apprenant on l'affiche #}
                     <td>
-                        {% for note in mod.matiere.avoirNotes %}
-                        {% if note.apprenants == apprenant %}
-                            {{ note.note }}
+                        {% for aNote in mod.matiere.avoirNotes %}
+                        {% if aNote.apprenants == apprenant %}
+                            {{ aNote.note }}
                         {% endif %}
                         {% endfor %}
                     </td>

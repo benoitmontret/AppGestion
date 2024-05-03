@@ -84,7 +84,7 @@ class FormateurController extends AbstractController
     );
 }
 
-// routes pours les notes
+// routes pour les notes
     #[Route('/formateur_notes/{id}', name: 'formateur_notes')]
     public function formateur_notes(Module $module,EntityManagerInterface $manager): Response
     {
@@ -97,7 +97,6 @@ class FormateurController extends AbstractController
     #[Route('/modifierNote/{id}', name: 'modifierNote')]
     public function modifierNote(AvoirNote $note, EntityManagerInterface $manager, Request $request): Response
     {
-
         $form = $this->createForm(NoteType::class, $note);
         $form-> handleRequest($request);
         

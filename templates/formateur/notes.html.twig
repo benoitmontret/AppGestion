@@ -17,31 +17,26 @@
             </tr>
         </thead>
         <tbody>
-        {% for appr in module.formation.apprenants %} {# boucle pour lister tous les apprenants d'un module #}
+        {% for appr in module.formation.apprenants %} {# boucle pour lister tous les apprenants d'une formation #}
                 <tr>
-                    <td>{{ appr.nom }}
-                    </td>
+                    <td>{{ appr.nom }}</td>
 
-                    <td>{{ appr.prenom }}
-                    </td>
+                    <td>{{ appr.prenom }}</td>
 
                     <td>
                     {% set pasDeNote = true %} {# permet à la fin de la boucle 'note' de mettre un lien pour ajouter la note quand il n'y en a pas encore #}
                         {% for note in module.matiere.avoirNotes %} {# comme avoirNote est une collection de note, on fait une boucle pour passer toutes les notes en revue #}
-                        {% if note.apprenants == appr %} {# test si la note correspond à l'apprenant pour l'afficher #}
-                            {{ note.note }}
+                            {% if note.apprenants == appr %} {# test si la note correspond à l'apprenant pour l'afficher #}
+                                {{ note.note }}
                     </td>
-                            {% set pasDeNote = false %} {# comme il y a une note il ne faut pas mettre de lien'ajouter' #}
-                    <td>
-                            <a href="{{ path("modifierNote", {id : note.id}) }}"> modifier {{ note.id }}</a>
-                    </td>
-                        {% endif %} 
+                                <td><a href="{{ path("modifierNote", {id : note.id}) }}"> modifier {{ note.id }}</a></td>
+                                {% set pasDeNote = false %} {# comme il y a une note il ne faut pas mettre de lien 'ajouter' #}
+                            {% endif %} 
                         {% endfor %}
 
                     <td>
                         {% if pasDeNote %}
-                            <a href="{{ path("ajouterNote", {idApp : appr.id, idMat : module.matiere.id }) }}"> ajouter {{ module.matiere.id }} / {{ appr.id }}</a> 
-
+                            <a href="{{ path("ajouterNote", {idApp : appr.id, idMat : module.matiere.id }) }}"> ajouter {{ module.matiere.id }} / {{ appr.id }}</a>
                         {% endif %}
                     </td>
                 </tr>
