@@ -130,17 +130,15 @@ class FormateurController extends AbstractController
 
         $form = $this->createForm(NoteType::class, $note);
         $form-> handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $note =$form ->getData();
             $manager->persist($note);
             $manager->flush();
             $this -> addFlash('success', 'La note a été ajoutée');
-            
-            return $this->redirectToRoute('formateurListe'); //modifier la route par redirection login
-            
-        }
 
+            return $this->redirectToRoute('formateurListe'); //modifier la route par redirection login
+        }
         return $this->render('formateur/ajouterNote.html.twig', [
             "form"=>$form->createView(),
             "note" => $note
