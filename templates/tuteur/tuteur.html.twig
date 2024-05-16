@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TUTEUR{% endblock %}
+{% block title %} {{ tuteur.nom }} {{tuteur.prenom}} {% endblock %}
 
 {% block body %}
 
 
 
 <div>
-    <h1>information pour le tuteur {{ tuteur.nom }}</h1>
+    <h1>Information pour le tuteur {{ tuteur.nom }} {{tuteur.prenom}} </h1>
 
     <h2> Liste de vos apprentis</h2>
 
@@ -30,5 +30,6 @@
         </tbody>
     </table>
 
+        <button onclick="window.location.href='{{ path('app_logout') }}'">Déconnexion</button>
 
 {% endblock %}

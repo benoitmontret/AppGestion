@@ -4,12 +4,19 @@
 
 {% block body %}
 
-<div class="">
-    <h1>Acceuil</h1>
+<div class="example-wrapper">
+            {% if is_granted('ROLE_APPRENANT') or is_granted('ROLE_TUTEUR') or is_granted ('ROLE_FORMATEUR') %}
+                <h1>Déconnectez-vous</h1>
+            {% else %}
+                <h1>Veuillez vous connecter.</h1>
+            {% endif %}
 
-    <a href="{{path("listeFormation") }}"> Liste des formations</a><br>
-    <a href="{{path("formateurListe") }}"> Liste des formateurs</a><br>
-    <a href="{{path("tuteurListe") }}"> Liste des tuteurs</a><br>
-    <a href="{{path("apprenantListe") }}"> Liste des apprenants</a><br>
-
+        <div class="connexion">
+            {% if is_granted('ROLE_APPRENANT') or is_granted('ROLE_TUTEUR') or is_granted ('ROLE_FORMATEUR') %}
+                <button class="bouton" onclick="window.location.href='{{ path('app_logout') }}'"><span>Déconnexion</span></button>
+            {% else %}
+                <button class="bouton" onclick="window.location.href='{{ path('app_login') }}'"><span>Connexion</span></button>
+            {% endif %}
+        </div>
+</div>
 {% endblock %}

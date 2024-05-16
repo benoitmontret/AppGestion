@@ -11,9 +11,17 @@ use App\Entity\FairePartie;
 use App\Entity\Utilisateur;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+        private $passwordHasher;
+
+        public function __construct(UserPasswordHasherInterface $passwordHasher)
+        {
+                $this->passwordHasher = $passwordHasher;
+        }
+
         public function load(ObjectManager $manager): void
         {
         // $product = new Product();
@@ -62,27 +70,46 @@ class AppFixtures extends Fixture
         $utilisateur1 -> setNom('Martin')
                         -> setPrenom('Gabriel')
                         -> setEmail('gmartin@mail.com')
-                        -> setPassword('0000')
-                        -> setRoles(['prof'])
+                        -> setRoles(['ROLE_FORMATEUR'])
                         -> addMatiere($matiere1)
                         -> addMatiere($matiere4);
+                
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur1,
+                '0000'
+                        );
+        $utilisateur1->setPassword($hashedPassword);
+        
         $manager->persist($utilisateur1);
 
         $utilisateur2 = new Utilisateur;
         $utilisateur2 -> setNom('Duchemin')
                         -> setPrenom('Michelle')
                         -> setEmail('mduchemin@mail.com')
-                        -> setPassword('0000')
-                        -> setRoles(['prof'])
+                        -> setRoles(['ROLE_FORMATEUR'])
                         -> addMatiere($matiere2);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur2,
+                '0001'
+                        );
+        $utilisateur2->setPassword($hashedPassword);
+
         $manager->persist($utilisateur2);
+
         $utilisateur3 = new Utilisateur;
         $utilisateur3 -> setNom('Gagnard')
                         -> setPrenom('Alain')
                         -> setEmail('agagnard@mail.fr')
-                        -> setPassword('0000')
-                        -> setRoles(['prof'])
+                        -> setRoles(['ROLE_FORMATEUR'])
                         -> addMatiere($matiere3);
+                        
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur3,
+                '0002'
+                        );
+        $utilisateur3->setPassword($hashedPassword);
+
         $manager->persist($utilisateur3);
 
 
@@ -91,37 +118,68 @@ class AppFixtures extends Fixture
         $utilisateur11 -> setNom('Lefèvre')
                         -> setPrenom('Augustin')
                         -> setEmail('alefevre@mail.fr')
-                        -> setRoles(['apprenant'])
-                        -> setPassword('0000');
+                        -> setRoles(['ROLE_APPRENANT']);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur11,
+                '0003'
+                        );
+        $utilisateur11->setPassword($hashedPassword);
+
         $manager->persist($utilisateur11);
 
         $utilisateur12 = new Utilisateur;
         $utilisateur12 -> setNom('Dubois')
                         -> setPrenom('Lou')
                         -> setEmail('ldubois@mail.fr')
-                        -> setRoles(['apprenant'])
-                        -> setPassword('0000');
+                        -> setRoles(['ROLE_APPRENANT']);
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur12,
+                '0004'
+                        );
+        $utilisateur12->setPassword($hashedPassword);
+
         $manager->persist($utilisateur12);
+
         $utilisateur13 = new Utilisateur;
         $utilisateur13 -> setNom('Martin')
                         -> setPrenom('Gabriel')
                         -> setEmail('gmartin@mail.fr')
-                        -> setRoles(['apprenant'])
-                        -> setPassword('0000');
+                        -> setRoles(['ROLE_APPRENANT']);
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur13,
+                '0005'
+                        );
+        $utilisateur13->setPassword($hashedPassword);
+
         $manager->persist($utilisateur13);
+
         $utilisateur14 = new Utilisateur;
         $utilisateur14 -> setNom('Fontaine')
                         -> setPrenom('Juliette')
                         -> setEmail('jfontaine@mail.fr')
-                        -> setRoles(['apprenant'])
-                        -> setPassword('0000');
+                        -> setRoles(['ROLE_APPRENANT']);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur14,
+                '0006'
+                        );
+        $utilisateur14->setPassword($hashedPassword);
+
         $manager->persist($utilisateur14);
+
         $utilisateur15 = new Utilisateur;
         $utilisateur15 -> setNom('Lopez')
                         -> setPrenom('Amelia')
                         -> setEmail('alopez@mail.fr')
-                        -> setRoles(['apprenant'])
-                        -> setPassword('0000');
+                        -> setRoles(['ROLE_APPRENANT']);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur15,
+                '0007'
+                        );
+        $utilisateur15->setPassword($hashedPassword);
+
         $manager->persist($utilisateur15);
 
 //fixture tuteurs
@@ -129,11 +187,16 @@ class AppFixtures extends Fixture
         $utilisateur21 -> setNom('Dubois')
                         -> setPrenom('Raphaël')
                         -> setEmail('rdubois@mail.fr')
-                        -> setRoles(['tuteur'])
-                        -> setPassword('0000')
+                        -> setRoles(['ROLE_TUTEUR'])
                         -> addApprenti($utilisateur11)
                         -> addApprenti($utilisateur12)
                         -> addApprenti($utilisateur13);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur21,
+                '0008'
+                        );
+        $utilisateur21->setPassword($hashedPassword);
 
         $manager->persist($utilisateur21);
 
@@ -141,10 +204,16 @@ class AppFixtures extends Fixture
         $utilisateur22 -> setNom('Larnis')
                         -> setPrenom('Sarah')
                         -> setEmail('slarnis@mail.fr')
-                        -> setRoles(['tuteur'])
-                        -> setPassword('0000')
+                        -> setRoles(['ROLE_TUTEUR'])
                         -> addApprenti($utilisateur14)
                         -> addApprenti($utilisateur15);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+                $utilisateur22,
+                '0009'
+                        );
+        $utilisateur22->setPassword($hashedPassword);
+
         $manager->persist($utilisateur22);
 
 //fixture formation

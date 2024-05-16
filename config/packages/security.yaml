@@ -18,6 +18,14 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: app_redirection
+                enable_csrf: true
+            logout:
+                path: app_logout
+                target: accueil
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -28,6 +36,16 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/apprenant, roles: ROLE_APPRENANT }
+        - { path: ^/tuteur, roles: ROLE_TUTEUR }
+        - { path: ^/formateur, roles: ROLE_FORMATEUR }
+        - { path: /, roles: PUBLIC_ACCESS }
+
+    role_hierarchy:
+        ROLE_APPRENANT: ROLE_USER
+        ROLE_TUTEUR: ROLE_USER
+        ROLE_FORMATEUR: ROLE_USER
+
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 

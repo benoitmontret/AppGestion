@@ -1,15 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PROGRAMME{% endblock %}
+{% block title %}Programme pour {{module.matiere.nom }}{% endblock %}
 
 {% block body %}
 
 <div>
-    <h1>le programme de la matiere {{ module.matiere.nom }} est : </h1>
+    <h1>Le programme de la matière {{ module.matiere.nom }} est : </h1>
 
 {{ module.programme }}
 
 
 </div>
+
+<button onclick="history.back()">Retourner à la page précédente</button>
 
 {% endblock %}

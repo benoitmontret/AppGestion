@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FORMATEUR-NOTE{% endblock %}
+{% block title %}Notes de {{module.matiere.nom}} pour {{ module.formation.nom}}{% endblock %}
 
 {% block body %}
 
@@ -12,7 +12,7 @@
             <tr>
                 <th>Nom</th>
                 <th>Prénom</th>
-                <th>Note</th>
+                <th>Notes</th>
             </tr>
         </thead>
         <tbody>
@@ -42,5 +42,7 @@
 <div>
     <a href="{{path("mettreNote", {id : module.id}) }}">Modifier les notes</a>
 </div>
+
+<button onclick="history.back()">Retourner à la page précédente</button>
 
 {% endblock %}

@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FORMATEUR{% endblock %}
+{% block title %} {{ formateur.nom }} {{formateur.prenom}} {% endblock %}
 
 {% block body %}
 
-    <h1>information pour le formateur {{ formateur.nom }}</h1>
+    <h1>Informations pour le formateur {{ formateur.nom }} {{formateur.prenom}} </h1>
 
 
     <table>
         <thead>
             <tr>
                 <th>Formation</th>
-                <th>matières</th>
+                <th>Matières</th>
                 <th>Voir</th>
                 <th>Mettre</th>
             </tr>
@@ -41,6 +41,6 @@
         </tbody>
     </table>
 
-
+        <button onclick="window.location.href='{{ path('app_logout') }}'">Déconnexion</button>
 
 {% endblock %}

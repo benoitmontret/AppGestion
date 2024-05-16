@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}APPRENANT{% endblock %}
+{% block title %}Liste des apprenants{% endblock %}
 
 {% block body %}
 
 <div>
-    <h1>Liste des apprenant</h1>
+    <h1>Liste des apprenants</h1>
 
     <ul>
         {% for apprenant in apprenantListe %}
@@ -20,4 +20,7 @@
 
 
 </div>
+
+<button onclick="history.back()">Retourner à la page précédente</button>
+
 {% endblock %}

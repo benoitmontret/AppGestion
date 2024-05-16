@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FORMATION{% endblock %}
+{% block title %}FORMATION {{ formation.nom}}{% endblock %}
 
 {% block body %}
 
 <div>
-    <h1>information pour la formation {{ formation.nom }}</h1>
+    <h1>Informations pour la formation {{ formation.nom }}</h1>
 
     {# affiche la liste des apprenant d'une formation #}
     <h2> Liste des apprenants</h2>
@@ -14,14 +14,11 @@
     {% endfor %}
 
     {% for mod in formation.modules %}
-        <p>{{mod.matiere.nom}} prog : {{mod.programme}}</p>
+        <p>{{mod.matiere.nom}} programme : {{mod.programme}}</p>
         <a href="{{path("programme", {id : mod.id}) }}"> {{ mod.matiere.nom}}</a><br>
     {% endfor %}
 
-
-
-
-
+<button onclick="history.back()">Retourner à la page précédente</button>
 
 </div>
 

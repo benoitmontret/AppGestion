@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FORMATEUR-PROG{% endblock %}
+{% block title %}Programme de {{module.matiere.nom}} pour {{module.formation.nom}}{% endblock %}
 
 {% block body %}
 
 <div>
-    <h1>le programme de {{ module.matiere.nom }} pour la formation {{ module.formation.nom }} est : </h1>
+    <h1>Le programme de {{ module.matiere.nom }} pour la formation {{ module.formation.nom }} est : </h1>
 
 {{ module.programme }}
 
@@ -14,5 +14,7 @@
 <div>
     <a href="{{path("editProgramme", {id : module.id}) }}">Modifier le programme</a>
 </div>
+
+<button onclick="history.back()">Retourner à la page précédente</button>
 
 {% endblock %}

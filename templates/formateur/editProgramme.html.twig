@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}MODIFIER PROG{% endblock %}
+{% block title %}Modifier le programme{% endblock %}
 
 {% block body %}
 
@@ -16,5 +16,7 @@
 {{ form_row(form.Envoyer) }}
 
 {# {{ form_end(form) }} #}
+
+<button onclick="history.back()">Retourner à la page précédente</button>
 
 {% endblock %}
