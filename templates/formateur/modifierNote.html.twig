@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier le programme{% endblock %}
+{% block title %}MODIFIER NOTE{% endblock %}
 
 {% block body %}
 
 
-    <h1>Modifier le programme :</h1>
+    <h1>Modifier la note de {{ note.apprenants.nom }} {{ note.apprenants.prenom }} en {{ note.matieres.nom }} :</h1>
 
 {{ form_start(form) }}
 
-{{ form_label(form.programme) }}<br>
-{{ form_widget(form.programme) }}
+{{ form_label(form.note) }}
+{{ form_widget(form.note) }}<br><br>
 {{ form_row(form.Envoyer) }}
 
 <div visibility : hidden> {# cache les champs rempli automatiquement #}
@@ -19,6 +19,6 @@
 
 {{ form_end(form) }}
 
-<button onclick="history.back()">Retourner à la page précédente</button>
+
 
 {% endblock %}

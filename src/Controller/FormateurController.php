@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Module;
 use App\Form\NoteType;
+use App\Entity\Matiere;
+use App\Entity\AvoirNote;
 use App\Entity\Formation;
 use App\Entity\Utilisateur;
 use App\Form\ProgrammeType;
@@ -80,10 +82,9 @@ class FormateurController extends AbstractController
     // #[IsGranted('prof')]
     public function editProgramme(Module $module, EntityManagerInterface $manager, Request $request): Response
     {
-        $id = $module->getId();
-        
         $form = $this->createForm(ProgrammeType::class, $module);
         $form-> handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $module =$form ->getData();
             $manager->persist($module);
@@ -95,29 +96,38 @@ class FormateurController extends AbstractController
 
         return $this->render('formateur/editProgramme.html.twig', 
         ["form"=>$form->createView()]
-        );
-    }
+    );
+}
 
     #[Route('/mettreNote/{id}', name: 'mettreNote')]
     // #[IsGranted('prof')]
     public function mettreNote(Module $module, EntityManagerInterface $manager, Request $request): Response
     {
-        $id = $module->getId();
-        
-        $form = $this->createForm(NoteType::class, $module);
+        $note = new AvoirNote();
+        $apprenant = $manager->getRepository(utilisateur::class)->find($idApp);
+        $matiere = $manager->getRepository(Matiere::class)->find($idMat);
+
+        $note->setApprenants($apprenant);
+        $note->setMatieres($matiere);
+
+        $form = $this->createForm(NoteType::class, $note);
         $form-> handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $note =$form ->getData();
+            $manager->persist($note);
+            $manager->flush();
+            $this -> addFlash('success', 'La note a été ajoutée');
+            
+            return $this->redirectToRoute('formateurListe'); //modifier la route par redirection login
+            
+        }
 
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $module =$form ->getData();
-        //     $manager->persist($module);
-        //     $manager->flush();
-        //     $this -> addFlash('success', 'Les notes ont  été modifiées');
-
-        //     return $this->redirectToRoute('formateur_prog', ['id' => $id]);
-        // }
-
-        return $this->render('formateur/mettreNote.html.twig', 
-        ["form"=>$form->createView()]
+        return $this->render('formateur/ajouterNote.html.twig', [
+            "form"=>$form->createView(),
+            "note" => $note
+        ]
         );
     }
+
 }

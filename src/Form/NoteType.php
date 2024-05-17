@@ -2,13 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\AvoirNote;
 use App\Entity\Matiere;
+use App\Entity\AvoirNote;
 use App\Entity\Utilisateur;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class NoteType extends AbstractType
 {
@@ -24,6 +25,7 @@ class NoteType extends AbstractType
                 'class' => Matiere::class,
                 'choice_label' => 'id',
             ])
+            ->add('Envoyer', SubmitType::class)
         ;
     }
 

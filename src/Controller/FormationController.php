@@ -20,7 +20,7 @@ class FormationController extends AbstractController
     //     ]);
     // }
 
-    // afficher les formations et les matiere
+    // afficher les formations et les matiere ##route de travail##
     #[Route('/listeFormation', name: 'listeFormation')]
     public function listeFormation(EntityManagerInterface $manager ): Response
     {
@@ -33,7 +33,7 @@ class FormationController extends AbstractController
         ]);
     }
 
-    // Afficher les info d'une formation
+    // Afficher les info d'une formation ##route de travail##
     #[Route('/formation/{id}', name: 'formation')]
     public function formation(Formation $formation,EntityManagerInterface $manager): Response
     {
