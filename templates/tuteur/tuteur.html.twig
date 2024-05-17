@@ -23,7 +23,7 @@
             {% for apprenti in tuteur.apprentis %}
                 <tr>
                     <td><a href="{{path("apprenti", {id : apprenti.id}) }}"> {{ apprenti.nom}}</a></td>
-                    <td>{{ apprenti.prenom }}</td>
+                    <td><a href="{{path("apprenti", {id : apprenti.id}) }}"> {{ apprenti.prenom }}</a></td>
                     <td>{{ apprenti.formation.nom }}</td>
                 </tr>
             {% endfor %}
