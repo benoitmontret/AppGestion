@@ -5,7 +5,9 @@
 {% block body %}
 <header>
 <div class="navbar">
+{# commenter le logo qu'on en veut pas afficher #}
     <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    {# <img class="logo" src="\assets\img\logoA.png" alt="Foxmation">  #}
     <div class="titre">
       <h1>FoXmation</h1>
       <button class="bouton-connexion" onclick="window.location.href='{{ path('app_login') }}'"><span>Connexion</span></button>
