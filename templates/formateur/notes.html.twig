@@ -4,6 +4,14 @@
 
 
 {% block body %}
+<header>
+<div class="navbar">
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="titre">
+      <h1>FoXmation</h1>
+       <button class="bouton-déconnexion" onclick="window.location.href='{{ path('app_logout') }}'"><span>Déconnexion</span></button>
+    </div>
+</div>
 
 <div>
     <h1>Notes de {{ module.matiere.nom }} pour la formation {{ module.formation.nom }}</h1>
@@ -33,14 +41,14 @@
                     </td>
                             {% set pasDeNote = false %} {# comme il y a une note il ne faut pas mettre de lien'ajouter' #}
                     <td>
-                            <a href="{{ path("modifierNote", {id : note.id}) }}"> modifier {{ note.id }}</a>
+                            <a href="{{ path("modifierNote", {id : note.id}) }}"> Modifier </a>
                     </td>
                         {% endif %} 
                         {% endfor %}
 
                     <td>
                         {% if pasDeNote %}
-                            <a href="{{ path("ajouterNote", {idApp : appr.id, idMat : module.matiere.id }) }}"> ajouter {{ module.matiere.id }} / {{ appr.id }}</a> 
+                            <a href="{{ path("ajouterNote", {idApp : appr.id, idMat : module.matiere.id }) }}"> Ajouter </a> 
 
                         {% endif %}
                     </td>
@@ -52,5 +60,14 @@
 </div>
 
 <br><br>
-
+<footer>
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="reseaux-sociaux">
+    <a href="https://www.facebook.com/"><img src="\assets\img\Icon akar-facebook-fill.svg" alt="Facebook"></a>
+    <a href="https://linkedin.com/?&"><img src="\assets\img\Icon akar-linkedin-fill.svg" alt="Twitter"></a>
+    <a href="https://www.twitter.com/"><img src="\assets\img\Icon akar-twitter-fill.svg "alt="Instagram"></a>
+    </div>
+  <p>&copy; 2024 FoXmation</p>
+</footer>
+</header>
 {% endblock %}

@@ -3,8 +3,16 @@
 {% block title %} {{ formateur.nom }} {{formateur.prenom}} {% endblock %}
 
 {% block body %}
+<header>
+<div class="navbar">
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="titre">
+      <button class="bouton-déconnexion" onclick="window.location.href='{{ path('app_logout') }}'">Déconnexion</button>
+    <h1>FoXmation</h1>
+    </div>
+</div>
 
-    <h1>Informations pour le formateur {{ formateur.nom }} {{formateur.prenom}} </h1>
+    <h2>Informations pour le formateur {{ formateur.nom }} {{formateur.prenom}} </h2>
 
 
     <table>
@@ -40,7 +48,14 @@
 
         </tbody>
     </table>
-
-        <button onclick="window.location.href='{{ path('app_logout') }}'">Déconnexion</button>
-
+    <footer>
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="reseaux-sociaux">
+    <a href="https://www.facebook.com/"><img src="\assets\img\Icon akar-facebook-fill.svg" alt="Facebook"></a>
+    <a href="https://linkedin.com/?&"><img src="\assets\img\Icon akar-linkedin-fill.svg" alt="Twitter"></a>
+    <a href="https://www.twitter.com/"><img src="\assets\img\Icon akar-twitter-fill.svg "alt="Instagram"></a>
+    </div>
+  <p>&copy; 2024 FoXmation</p>
+</footer>
+</header>
 {% endblock %}

@@ -91,7 +91,7 @@ class AppFixtures extends Fixture
 
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur2,
-                '0001'
+                '0000'
                         );
         $utilisateur2->setPassword($hashedPassword);
 
@@ -106,7 +106,7 @@ class AppFixtures extends Fixture
                         
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur3,
-                '0002'
+                '0000'
                         );
         $utilisateur3->setPassword($hashedPassword);
 
@@ -122,7 +122,7 @@ class AppFixtures extends Fixture
 
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur11,
-                '0003'
+                '0000'
                         );
         $utilisateur11->setPassword($hashedPassword);
 
@@ -135,7 +135,7 @@ class AppFixtures extends Fixture
                         -> setRoles(['ROLE_APPRENANT']);
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur12,
-                '0004'
+                '0000'
                         );
         $utilisateur12->setPassword($hashedPassword);
 
@@ -148,7 +148,7 @@ class AppFixtures extends Fixture
                         -> setRoles(['ROLE_APPRENANT']);
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur13,
-                '0005'
+                '0000'
                         );
         $utilisateur13->setPassword($hashedPassword);
 
@@ -162,7 +162,7 @@ class AppFixtures extends Fixture
 
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur14,
-                '0006'
+                '0000'
                         );
         $utilisateur14->setPassword($hashedPassword);
 
@@ -176,7 +176,7 @@ class AppFixtures extends Fixture
 
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur15,
-                '0007'
+                '0000'
                         );
         $utilisateur15->setPassword($hashedPassword);
 
@@ -194,7 +194,7 @@ class AppFixtures extends Fixture
 
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur21,
-                '0008'
+                '0000'
                         );
         $utilisateur21->setPassword($hashedPassword);
 
@@ -210,7 +210,7 @@ class AppFixtures extends Fixture
 
         $hashedPassword = $this->passwordHasher->hashPassword(
                 $utilisateur22,
-                '0009'
+                '0000'
                         );
         $utilisateur22->setPassword($hashedPassword);
 

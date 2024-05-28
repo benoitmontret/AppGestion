@@ -1,12 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion en cours...{% endblock %}
+{% block title %}Connexion au login{% endblock %}
 
 {% block body %}
+<header>
+<div class="navbar">
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="titre">
+      <h1>FoXmation</h1>
+      <button class="bouton-connexion" onclick="window.location.href='{{ path('app_login') }}'"><span>Connexion</span></button>
+    </div>
+</div>
+
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-
+    <div class="contenu-login">
+  
+    <h1>Veuillez vous connecter</h1>
+    
     <form action="{{ path('app_login') }}" method="post" class="connect-form">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
@@ -18,4 +30,19 @@
 
         <button type="submit">Se connecter</button>
     </form>
+</div>
+
+<footer>
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="reseaux-sociaux">
+    <a href="https://www.facebook.com/"><img src="\assets\img\Icon akar-facebook-fill.svg" alt="Facebook"></a>
+    <a href="https://linkedin.com/?&"><img src="\assets\img\Icon akar-linkedin-fill.svg" alt="Twitter"></a>
+    <a href="https://www.twitter.com/"><img src="\assets\img\Icon akar-twitter-fill.svg "alt="Instagram"></a>
+    </div>
+  <p>&copy; 2024 FoXmation</p>
+</footer>
+
+
+
+</header>
 {% endblock %}

@@ -3,15 +3,18 @@
 {% block title %}{{ utilisateur.prenom }} {{  utilisateur.nom  }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="navbar">
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="titre">
+     <button class="bouton-déconnexion" onclick="window.location.href='{{ path('app_logout') }}'"><span>Déconnexion</span></button>
+      <h1>FoXmation</h1>
+    </div>
+</div>
 
 <div class="example-wrapper">
     
     <h1>Information pour l'apprenant {{ utilisateur.nom }} {{ utilisateur.prenom }}</h1>
-    <h2>Notes pour la formation : {{ utilisateur.formation.nom }}</h2>
+    <h1>Notes pour la formation : {{ utilisateur.formation.nom }}</h1>
 <table>
         <thead>
             <tr>
@@ -39,5 +42,14 @@
     </table>
 
         <button onclick="window.location.href='{{ path('app_logout') }}'">Déconnexion</button>
-
+<footer>
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="reseaux-sociaux">
+    <a href="https://www.facebook.com/"><img src="\assets\img\Icon akar-facebook-fill.svg" alt="Facebook"></a>
+    <a href="https://linkedin.com/?&"><img src="\assets\img\Icon akar-linkedin-fill.svg" alt="Twitter"></a>
+    <a href="https://www.twitter.com/"><img src="\assets\img\Icon akar-twitter-fill.svg "alt="Instagram"></a>
+    </div>
+  <p>&copy; 2024 FoXmation</p>
+</footer>
+</header>
 {% endblock %}

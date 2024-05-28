@@ -3,10 +3,16 @@
 {% block title %}Vos apprentis à FoXmation{% endblock %}
 
 {% block body %}
-
+<div class="navbar">
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="titre">
+     <button class="bouton-déconnexion" onclick="window.location.href='{{ path('app_logout') }}'"><span>Déconnexion</span></button>
+      <h1>FoXmation</h1>
+    </div>
+</div>
 <div>
     <h1>Notes de votre apprenti {{ apprenti.nom }} {{ apprenti.prenom }}</h1>
-    <h2>pour la formation : {{ apprenti.formation.nom }}</h2>
+    <h1>pour la formation : {{ apprenti.formation.nom }}</h1>
 
     <table>
         <thead>
@@ -35,5 +41,15 @@
     </table>
 
 <button onclick="history.back()">Retourner à la page précédente</button>
+<footer>
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="reseaux-sociaux">
+    <a href="https://www.facebook.com/"><img src="\assets\img\Icon akar-facebook-fill.svg" alt="Facebook"></a>
+    <a href="https://linkedin.com/?&"><img src="\assets\img\Icon akar-linkedin-fill.svg" alt="Twitter"></a>
+    <a href="https://www.twitter.com/"><img src="\assets\img\Icon akar-twitter-fill.svg "alt="Instagram"></a>
+    </div>
+  <p>&copy; 2024 FoXmation</p>
+</footer>
+</header>
 
 {% endblock %}

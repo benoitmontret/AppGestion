@@ -3,28 +3,49 @@
 {% block title %}FoXmation{% endblock %}
 
 {% block body %}
+<header>
+<div class="navbar">
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="titre">
+      <h1>FoXmation</h1>
+      <button class="bouton-connexion" onclick="window.location.href='{{ path('app_login') }}'"><span>Connexion</span></button>
+    </div>
+</div>
+
+<div class="accueil">
+        <div class="contenu">
+            <img src="\assets\img\image-formation.jpeg">
+        </div>
+</div>
+  <div class="connexion">
+            {% if is_granted('ROLE_APPRENANT') or is_granted('ROLE_TUTEUR') or is_granted ('ROLE_FORMATEUR') %}
+                <button class="bouton-déconnexion" onclick="window.location.href='{{ path('app_logout') }}'"><span>Déconnexion</span></button>
+            {% else %}
+                
+            {% endif %}
+        </div>
+
 
 <div class="example-wrapper">
             {% if is_granted('ROLE_APPRENANT') or is_granted('ROLE_TUTEUR') or is_granted ('ROLE_FORMATEUR') %}
                 <h1>Déconnectez-vous</h1>
             {% else %}
-                <h1>Veuillez vous connecter.</h1>
+                
             {% endif %}
-
-        <div class="connexion">
-            {% if is_granted('ROLE_APPRENANT') or is_granted('ROLE_TUTEUR') or is_granted ('ROLE_FORMATEUR') %}
-                <button class="bouton" onclick="window.location.href='{{ path('app_logout') }}'"><span>Déconnexion</span></button>
-            {% else %}
-                <button class="bouton" onclick="window.location.href='{{ path('app_login') }}'"><span>Connexion</span></button>
-            {% endif %}
-        </div>
 </div>
-{# <div class="">
-    <h1>Acceuil</h1>
 
-    <a href="{{path("formateurListe") }}"> Liste des formateurs</a><br>
-    <a href="{{path("tuteurListe") }}"> Liste des tuteurs</a><br>
-    <a href="{{path("apprenantListe") }}"> Liste des apprenants</a><br>
-    <a href="{{path("listeFormation") }}"> Liste des formations</a><br> #}
+<footer>
+    <img class="logo" src="\assets\img\logo-renard.png" alt="Foxmation"> 
+    <div class="reseaux-sociaux">
+    <a href="https://www.facebook.com/"><img src="\assets\img\Icon akar-facebook-fill.svg" alt="Facebook"></a>
+    <a href="https://linkedin.com/?&"><img src="\assets\img\Icon akar-linkedin-fill.svg" alt="Twitter"></a>
+    <a href="https://www.twitter.com/"><img src="\assets\img\Icon akar-twitter-fill.svg "alt="Instagram"></a>
+    </div>
+  <p>&copy; 2024 FoXmation</p>
+</footer>
+
+
+</header>
+
 
 {% endblock %}
